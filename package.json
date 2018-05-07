@@ -1,0 +1,43 @@
+{
+  "name": "upce-voting",
+  "version": "1.1.0",
+  "description": "Implementation of a voting platform using Paillier cryptosystem",
+  "main": "main.js",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-promise-router": "^3.0.2",
+    "joi": "^13.2.0",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.0.17",
+    "nodemon": "^1.17.4",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.1.1"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start-dev": "nodemon ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkstyl3/UPCe-Voting.git"
+  },
+  "author": "Marc Mansilla",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mkstyl3/UPCe-Voting/issues"
+  },
+  "homepage": "https://github.com/mkstyl3/UPCe-Voting#readme"
+}
