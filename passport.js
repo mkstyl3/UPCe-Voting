@@ -26,7 +26,7 @@ passport.use(new JwtStrategy({
 }));
 
 
-// LOCAL STRATEGY
+// LOCAL STRATEGY  LOGIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIN
 passport.use(new LocalStrategy({
     usernameField: 'username'
 }, async (username, password, done) => {

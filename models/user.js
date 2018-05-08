@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema(
     {
-        username:    { type: String, required: true, unique: true },  // Campo obligatório para insertar
-        password:    { type: String, required: true },                // Campo obligatório para insertar
-        name:        { type: String, required: true },                // Campo obligatório para insertar
-        email:       { type: String, required: true },                // Campo obligatório para insertar
-        admin:       { type: Boolean }
+        username:    { type: String, required: true, unique: true },  
+        password:    { type: String, required: true },                         
+        email:       { type: String }, 
+        subjects:    [ { type: String } ],   
+        role:        { type: Number },
+        anonymous:   { type: Boolean }
     }
 );
 

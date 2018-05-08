@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const Subject = require('../models/subject');
 const { JWT_SECRET } = require('../configs/keys');
 const JWT = require('jsonwebtoken');
 
@@ -45,4 +45,17 @@ module.exports = {
         //res.json(user);
 
     },
+    addSubject: async (req, res) => {
+        
+        //Check if there is a user with the same username
+        const foundSubject = await Subject.findOne({ name: req.value.body.name });
+        if(foundSubject) {
+            return res.status(403).json({ error : 'This subject is already in use'})
+        }
+
+        const newSubject = new Subject(req.value.body);
+        let subject = await newSubject.save();
+        let subjectId = subject.id;
+        res.status(200).json({ subjectId });
+    }
 };
