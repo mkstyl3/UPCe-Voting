@@ -1,7 +1,10 @@
 const Subject = require('../models/subject');
 const { JWT_SECRET } = require('../configs/keys');
 const JWT = require('jsonwebtoken');
+const rsa = require('../lib/rsa');
+const User = require('../models/user');
 
+const { publicKey, privateKey } = rsa.generateRandomKeys(512); // Change to at least 2048 bits in production state
 //try-catch blocks are implicit thanks to the express-promise-router lib from routes.users.js//
 
 signToken = user => {
@@ -57,5 +60,17 @@ module.exports = {
         let subject = await newSubject.save();
         let subjectId = subject.id;
         res.status(200).json({ subjectId });
+    },
+
+    getSubjects: async (req, res) => {
+        Subject.find({}, { __v: false })
+            .exec( function (err, subjects) {
+                if (err) {
+                    console.log(err);
+                    return res.status(202).send({'error': err.getMessage()});  // Devuelve un JSON
+                } else {
+                    return res.status(200).send(subjects);                // Devuelve un JSON
+        }});
     }
+
 };
