@@ -8,5 +8,5 @@ router.route('/signin').post(passport.authenticate('local', { session: false }) 
 router.route('/signup').post(validateBody(schemas.signUp), users.signUp);
 router.route('/addSubject').post(validateBody(schemas.addSubject), users.addSubject);
 router.route('/getSubjects').get(users.getSubjects);
-
+//passport.authenticate('jwt', { session: false })
 module.exports = router;
