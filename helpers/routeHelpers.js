@@ -30,7 +30,7 @@ module.exports = {
             password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
             username: Joi.string().alphanum().min(3).max(30).required(),
         }),
-        addSubject: Joi.object().keys({
+        addSubjectVote: Joi.object().keys({
             name: Joi.string().alphanum().max(10).required(),
             grade: Joi.number(),
             content: Joi.number(),

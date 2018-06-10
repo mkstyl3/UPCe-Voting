@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const subjectSchema = new mongoose.Schema(
+const subjectVoteSchema = new mongoose.Schema(
     {
         name:            { type: String, required: true, unique: true },   // Nombre asignatura                    
         concepts:        { type: Number, default: null },
@@ -13,4 +13,4 @@ const subjectSchema = new mongoose.Schema(
 );
 
 
-module.exports = mongoose.model('Subject', subjectSchema);
+module.exports = mongoose.model('SubjectVote', subjectVoteSchema);

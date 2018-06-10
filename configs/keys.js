@@ -1,3 +1,4 @@
 module.exports = {
-    JWT_SECRET: 'buongiorno'
+    JWT_SECRET: 'buongiorno',
+    HASH_KEY: 'julieta'
 };
