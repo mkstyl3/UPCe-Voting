@@ -1,4 +1,4 @@
-const SubjectVote = require('../models/subject-vote');
+const SubjectVote = require('../models/subjectVote');
 const { JWT_SECRET } = require('../configs/keys');
 const JWT = require('jsonwebtoken');
 const rsa = require('../lib/rsa');
