@@ -30,12 +30,15 @@ module.exports = {
         console.log("I'm inside of insertUserToken!");
 
         //Check if there is a user with the same username
-        const foundUser = await User.findOne({ username: req.value.body.username });
+        const foundUser = await User.findOne({ username: req.body.username });
         if(foundUser) {
             return res.status(403).json({ error : 'This username is already in use'})
         }
-
-        const newUser = new User(req.value.body);
+        /* El constructor no me pilla la lista de asignatura,
+           se lo paso manualmente...       
+        */
+        const newUser = new User(req.body);
+        newUser.subjects = req.body.subjects;
         let user = await newUser.save();
         let userId = user.id;
         // Generate the token
@@ -80,6 +83,7 @@ module.exports = {
         if(!foundUser) {
             return res.status(404).json({ dbError : 'Not found'})
         }
+        foundUser.password = null;
         return res.status(200).json( foundUser );
     }
 };
