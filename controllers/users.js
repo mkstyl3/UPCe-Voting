@@ -1,4 +1,4 @@
-const SubjectVote = require('../models/subject-vote');
+const Vote = require('../models/vote');
 const { JWT_SECRET } = require('../configs/keys');
 const JWT = require('jsonwebtoken');
 const rsa = require('../lib/rsa');
@@ -51,19 +51,19 @@ module.exports = {
     },
     addSubjectVote: async (req, res) => {
         //Check if there is a user with the same username
-        const foundSubjectVote = await SubjectVote.findOne({ name: req.value.body.name });
+        const foundSubjectVote = await Vote.findOne({ name: req.value.body.name });
         if(foundSubjectVote) {
             return res.status(403).json({ error : 'This subjectVote is already in use'})
         }
 
-        const newSubjectVote = new SubjectVote(req.value.body);
+        const newSubjectVote = new Vote(req.value.body);
         let subjectVote = await newSubjectVote.save();
         let subjectVoteId = subjectVote.id;
         res.status(200).json({ subjectVoteId });
     },
 
     getSubjectVotes: async (req, res) => {
-        SubjectVote.find({}, { __v: false })
+        Vote.find({}, { __v: false })
             .exec(function (err, subjectsVotes) {
                 if (err) {
                     console.log(err);
