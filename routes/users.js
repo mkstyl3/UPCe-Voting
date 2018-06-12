@@ -1,5 +1,6 @@
 const router = require('express-promise-router')();
 const users = require('../controllers/users');
+const subjects = require('../controllers/subjects');
 const passport = require('passport');
 const passportConfig = require('../passport');
 const { validateBody, schemas } = require('../helpers/routeHelpers');
@@ -11,4 +12,6 @@ router.route('/signup').post(users.signUp);
 
 router.route('/:id').get(passport.authenticate('jwt', { session: false }), users.getUser);
 //passport.authenticate('jwt', { session: false })
+router.route('/addSubject').post(subjects.addSubject);
+router.route('/vote').post(users.vote);
 module.exports = router;

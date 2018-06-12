@@ -1,4 +1,4 @@
-const Vote = require('../models/vote');
+const SubjectVote = require('../models/subjectVote');
 const { JWT_SECRET } = require('../configs/keys');
 const JWT = require('jsonwebtoken');
 const rsa = require('../lib/rsa');
@@ -85,5 +85,43 @@ module.exports = {
         }
         foundUser.password = null;
         return res.status(200).json( foundUser );
-    }
+    },
+    vote: async (req, res) => {
+        SubjectVote.update({ name: req.body.name }, { $push: { conceptsList: req.body.concepts } }, function(err) {
+            if (err) {
+                console.log(err);
+                return res.status(202).send({'result': 'ERROR'});       // Devuelve un JSON
+        } else{
+            SubjectVote.update({ name: req.body.name }, { $push: { difficultyList: req.body.difficulty } }, function(err) {
+                if (err) {
+                    console.log(err);
+                    return res.status(202).send({'result': 'ERROR'});       // Devuelve un JSON
+            } else{
+                SubjectVote.update({ name: req.body.name }, { $push: { relationList: req.body.relation } }, function(err) {
+                    if (err) {
+                        console.log(err);
+                        return res.status(202).send({'result': 'ERROR'});       // Devuelve un JSON
+                } else{
+                    return SubjectVote.update({ name: req.body.name }, { $push: { teacherList: req.body.professor } }, function(err) {
+                        if (err) {
+                            console.log(err);
+                            return res.status(202).send({'result': 'ERROR'});       // Devuelve un JSON
+                    } else{
+                        return SubjectVote.update({ name: req.body.name }, { $push: { materialsList: req.body.materials } }, function(err) {
+                            if (err) {
+                                console.log(err);
+                                return res.status(202).send({'result': 'ERROR'});       // Devuelve un JSON
+                        } else{
+                            return res.status(200).send({'result': 'ACTUALIZADO'}); // Devuelve un JSON
+                        }
+                    });
+                    }
+                });
+                }
+            });
+            }
+        });
+        }
+    });}
+    
 };
