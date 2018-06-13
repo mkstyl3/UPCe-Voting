@@ -3,6 +3,9 @@ const { JWT_SECRET } = require('../configs/keys');
 const JWT = require('jsonwebtoken');
 const rsa = require('../lib/rsa');
 const User = require('../models/user');
+const bignum = require('bignum');
+const { publicKey, privateKey } = rsa.generateRandomKeys(512); // Change to at least 2048 bits in production state
+const { 'publicKey': publicKeyRecuento, 'privateKey': privateKeyRecuento } = rsa.generateRandomKeys(512); // Change to at least 2048 bits in production state
 
 /*
     Try-catch blocks are implicit thanks to the express-promise-router lib from routes.users.js//
@@ -87,6 +90,7 @@ module.exports = {
         return res.status(200).json( foundUser );
     },
     vote: async (req, res) => {
+        console.log('MARCA');
         SubjectVote.update({ name: req.body.name }, { $push: { conceptsList: req.body.concepts } }, function(err) {
             if (err) {
                 console.log(err);
@@ -122,6 +126,13 @@ module.exports = {
             }
         });
         }
-    });}
+    });},
+
+    receiveBKpub: async (req, res) => {
+        //console.log(req.body);
+        console.log(publicKeyRecuento);
+        //Firmar BKpubA
+        return res.status(200).json({ publicKeyRecuento, 'sBkpubA' : String(privateKey.sign(rsa.stringToBignum(String(req.body)))) });
+    }
     
 };
